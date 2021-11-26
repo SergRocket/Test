@@ -11,6 +11,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
+import static org.apache.commons.lang3.ArrayUtils.swap;
+
+
 public class AlgTraining {
 
 
@@ -541,5 +544,167 @@ public class AlgTraining {
         //String string = resu.stream().map(a->a.toString()).collect(Collectors.joining(", "));
         //int recorded = Integer.parseInt(string);
         // System.out.print(string);
+    }
+
+    @Test
+    public void getSumOfArray(){
+        int [] arr = {2,4,5,7,8};
+        int sum = 0;
+        for(int value: arr){
+            sum += value;
+        }
+        System.out.println(sum);
+    }
+
+    private void fizzBuzzify(int value) {
+        if (value % 3 == 0) {
+            System.out.println((value % 5 == 0) ? "FizzBuzz" : "Fizz");
+        }
+        System.out.println((value % 5 != 0) ? "Buzz" : Integer.toString(value));
+    }
+
+    @Test
+    public void fizzBusTask(){
+        fizzBuzzify(45);
+    }
+
+    @Test
+    public void getDuplic(){
+        int numbs[] = {1,1,1,2,5,2,3};
+        HashSet<Integer> sets = new HashSet<>();
+        List<Integer> dupls = new ArrayList<>();
+        for(Integer numb : numbs){
+            if(sets.add(numb) == false){
+                dupls.add(numb);
+            }
+        }
+        System.out.println("The dupls is: " + dupls);
+        System.out.println("The qnt is: " + dupls.size());
+    }
+
+    @Test
+    public void getDupl(){
+        int numbs[] = {1,1,1,2,3,4,2};
+        String strs[] = {"Hi", "She", "Hi", "She", "It"};
+        HashSet<Integer> sets = new HashSet<>();
+        for(int i = 0; i < numbs.length; i++){
+            for(int j = i + 1; j < numbs.length; j++){
+                if(numbs[i] == (numbs[j])){
+                    sets.add(numbs[i]);
+                }
+            }
+        }
+        System.out.println("The duplicates are: " + sets);
+        System.out.println("The duplicates size is: " + sets.size());
+    }
+
+    @Test
+    public void getStrDupl(){
+        String strs[] = {"Hi", "She", "Hi", "She", "It"};
+        HashSet<String> setsStr = new HashSet<>();
+        for(int i=0; i < strs.length; i++){
+            for(int b = i +1; b<strs.length; b++){
+                if(strs[i] == strs[b]){
+                    setsStr.add(strs[i]);
+                }
+            }
+        }
+        System.out.println("The duplicates are: " + setsStr);
+        System.out.println("The duplicates size is: " + setsStr.size());
+    }
+
+    @Test
+    public void fibanch(){
+        int n1 = 0;
+        int n2=1;
+        int qnt = 9;
+        System.out.print(n1 + " " + n2 + " ");
+        for(int i=3; i <= qnt; i++){
+            int sum = n1 + n2;
+            System.out.print(sum + " ");
+            n1 = n2;
+            n2 = sum;
+        }
+    }
+
+    @Test
+    public void revertArrint(){
+        int inters[] = {1,2,3,4,5,6,7,8};
+        List<Integer> reverted = new ArrayList<>();
+        for(int i= inters.length-1;i>=0; i--){
+            reverted.add(inters[i]);
+        }
+        System.out.println("Reverted " + reverted);
+    }
+
+    @Test
+    public void isPalindr(){
+        //isPalindrs("abcca");
+        Assert.assertTrue(isPalindrs("adddd"));
+    }
+
+    public boolean isPalindrs(String  s){
+        String clean = s.replaceAll("\\s", "").toLowerCase();
+        int length = clean.length();
+        int forward = 0;
+        int backward = length -1;
+        while(backward > forward){
+            char forwdChar = clean.charAt(forward++);
+            char bkwrdChar = clean.charAt(backward--);
+            if(forwdChar != bkwrdChar)
+                return false;
+        }
+        return true;
+    }
+
+    @Test
+    public void getRnd(){
+        int max = 5;
+        int min = 1;
+        int difference = max - min;
+        Random rand = new Random();
+        int rands = rand.nextInt(difference +1)+min;
+        System.out.println(rands);
+    }
+
+    @Test
+    public void mergeArrays(){
+      int [] first = {1,2,3,4,5};
+      int [] sec = {6,7,8,9};
+      int flength = first.length;
+      int slength = sec.length;
+      int finlength = flength + slength;
+      int [] merged = new int[finlength];
+      System.arraycopy(first, 0, merged, 0, flength);
+      System.arraycopy(sec, 0, merged, flength, slength);
+      for(int i =0; i<merged.length; i++){
+          System.out.println(merged[i]);
+      }
+    }
+
+    @Test
+    public void getFactorial(){
+        int result = 1;
+        int factLimit = 4;
+        for(int i=1; i <=factLimit; i++){
+            result = result * i;
+        }
+        System.out.println(result);
+    }
+
+    @Test
+    public void sortArray(){
+        int [] arr = {3,12,45,6,44};
+        boolean contin = true;
+        while (contin){
+            contin = false;
+            for(int i = 1; i < arr.length; i++){
+                if(arr[i] < arr[i-1]){
+                    swap(arr, i, i-1);
+                    contin = true;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(arr));
     }
 }
