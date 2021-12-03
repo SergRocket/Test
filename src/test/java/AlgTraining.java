@@ -7,10 +7,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
 
+import static java.util.Collections.replaceAll;
 import static org.apache.commons.lang3.ArrayUtils.swap;
 
 
@@ -707,4 +711,133 @@ public class AlgTraining {
         }
         System.out.println(Arrays.toString(arr));
     }
+
+    @Test
+    public void convertListToArr(){
+        List<Integer> listed = new ArrayList<Integer>();
+        listed.add(1);
+        listed.add(2);
+        int[] arr = new int [listed.size()];
+        for(int i = 0; i<arr.length; i++){
+            arr[i] = listed.get(i);
+        }
+        System.out.println(Arrays.toString(arr));
+    }
+
+    @Test
+    public void getIntsFromArr(){
+        List<Integer> list = new ArrayList<>();
+        String [] arr = {"Hi", "2", "She", "1", "4", "It"};
+        for (int i = 0; i<arr.length; i++){
+            try {
+                list.add(Integer.parseInt(arr[i]));
+            } catch (NumberFormatException n){
+                n.printStackTrace();
+            }
+        }
+        System.out.println(list);
+    }
+
+    @Test
+    public void getSumFromInt(){
+        int one = 123;
+        String text = Integer.toString(one);
+        int sum = 0;
+        int len = text.length();
+        for(int i = 0; i<len; i++){
+            char charAt = text.charAt(i);
+            sum = sum + Integer.parseInt(String.valueOf(charAt));
+        }
+        System.out.println(sum);
+    }
+
+    @Test
+    public void filterStrGetIntFilterInt() {
+        List<Integer> canBeDivided = new ArrayList<>();
+        List<Integer> cantBeDivided = new ArrayList<>();
+        List<Integer> allInts = new ArrayList<>();
+        String given = "1234FB9";
+        int len = given.length();
+        for (int i = 0; i < len; i++) {
+            char charAt = given.charAt(i);
+            try {
+                allInts.add(Integer.parseInt(String.valueOf(charAt)));
+            } catch (NumberFormatException b) {
+                b.printStackTrace();
+            }
+        }
+        int sizeAll = allInts.size();
+        for (int c = 0; c < sizeAll; c++) {
+                    if (allInts.get(c) % 2 != 0) {
+                        canBeDivided.add(c);
+                    } else if (allInts.get(c) % 2 == 0) {
+                        cantBeDivided.add(c);
+                    }
+                }
+        System.out.println(allInts);
+        System.out.println(canBeDivided);
+        System.out.println(cantBeDivided);
+        }
+
+
+    public boolean isPalindromString(String given){
+        String filteredGiven = given.replaceAll("//s", " ").toLowerCase();
+        int stringLength = filteredGiven.length();
+        int moveForward = 0;
+        int moveBackward = stringLength -1;
+        while(moveBackward> moveForward){
+            char forwardChar = filteredGiven.charAt(moveForward++);
+            char backwardChar = filteredGiven.charAt(moveBackward--);
+            if(forwardChar != backwardChar){
+                return false;
+            }
+        }
+        return true;
+
+     }
+
+     @Test
+    public void callMethosToTestPalindrome(){
+        Assert.assertTrue(isPalindromString("abccba"));
+     }
+
+    public static int sum(int num, int total) {
+        if (num == 0) return total;
+        total += num % 10;
+        return sum(num / 10, total);
+    }
+
+    @Test
+            public void callRecursio(){
+        System.out.println("total: " + sum(123, 0));
+    }
+
+    @Test
+    public void randomIntWithUnix(){
+        long range = System.currentTimeMillis();
+        int start = 5;
+        int end = 9;
+        int difference = end - start;
+        int divided = (int) (range / difference %5 + start);
+        System.out.println(divided);
+    }
+
+    @Test
+    public void getIntFromString(){
+        String str = "123";
+        String filteredGiven = str.replaceAll("//s", " ").toLowerCase();
+        for (int i=0; i<str.length(); i++){
+            char givenChar = filteredGiven.charAt(i);
+            int abc = Character.getNumericValue(givenChar);
+            System.out.println(abc);
+        }
+
+
+
+        int codeInt = 120;
+        char charAt = (char) codeInt;
+        int getInt = Character.getNumericValue(codeInt);
+        System.out.println(getInt);
+    }
+
 }
